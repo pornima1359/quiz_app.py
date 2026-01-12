@@ -1,0 +1,161 @@
+import random
+
+# BIG question bank (you can keep adding more)
+QUESTION_BANK = [
+    ("Capital of India?", 
+     ["A. Mumbai", "B. Delhi", "C. Pune", "D. Chennai"], "B"),
+    
+    ("Python is used for?", 
+     ["A. Web", "B. Data Science", "C. AI", "D. All"], "D"),
+    
+    ("OOP stands for?", 
+     ["A. Object Oriented Programming", "B. Open Output", "C. Old Object", "D. None"], "A"),
+    
+    ("Symbol for comments in Python?", 
+     ["A. //", "B. #", "C. /* */", "D. <!-- -->"], "B"),
+    
+    ("Keyword to define function?", 
+     ["A. function", "B. def", "C. fun", "D. define"], "B"),
+    
+    ("Which is immutable?", 
+     ["A. List", "B. Dict", "C. Set", "D. Tuple"], "D"),
+    
+    ("2 ** 3 =", 
+     ["A. 6", "B. 8", "C. 9", "D. 5"], "B"),
+    
+    ("Loop with unknown iterations?", 
+     ["A. for", "B. while", "C. do", "D. repeat"], "B"),
+    
+    ("Correct file extension for Python?", 
+     ["A. .pt", "B. .py", "C. .p", "D. .python"], "B"),
+    
+    ("Used to take input?", 
+     ["A. scan()", "B. read()", "C. input()", "D. get()"], "C"),
+    
+    ("Who developed Python?", 
+     ["A. Dennis", "B. James", "C. Guido", "D. Linus"], "C"),
+    
+    ("Python is ___ language", 
+     ["A. Low-level", "B. Machine", "C. High-level", "D. Assembly"], "C"),
+    
+    ("Which is not a data type?", 
+     ["A. list", "B. tuple", "C. class", "D. int"], "C"),
+    
+    ("Logical AND operator?", 
+     ["A. &", "B. and", "C. &&", "D. plus"], "B"),
+    
+    ("Index of first element?", 
+     ["A. 1", "B. 0", "C. -1", "D. none"], "B")
+          
+    ("Which keyword is used to create a class in Python?",
+     ["A. class", "B. define", "C. struct", "D. object"], "A"),
+
+    ("What is the output of print(type(10))?",
+     ["A. <class 'float'>", "B. <class 'int'>", "C. <class 'str'>", "D. <class 'number'>"], "B"),
+
+    ("Which operator is used for floor division?",
+     ["A. /", "B. //", "C. %", "D. **"], "B"),
+
+    ("Which function returns the length of a list?",
+     ["A. size()", "B. count()", "C. length()", "D. len()"], "D"),
+
+    ("Which keyword is used to stop a loop?",
+     ["A. stop", "B. exit", "C. break", "D. end"], "C"),
+
+    ("Which keyword is used to skip current iteration?",
+     ["A. skip", "B. pass", "C. continue", "D. next"], "C"),
+
+    ("Which data type stores key-value pairs?",
+     ["A. list", "B. tuple", "C. set", "D. dictionary"], "D"),
+
+    ("Which method is used to add an element to a list?",
+     ["A. add()", "B. insert()", "C. append()", "D. put()"], "C"),
+
+    ("Which function is used to open a file?",
+     ["A. file()", "B. open()", "C. read()", "D. load()"], "B"),
+
+    ("Which keyword is used to handle exceptions?",
+     ["A. try", "B. catch", "C. error", "D. handle"], "A"),
+
+    ("Which block always executes in exception handling?",
+     ["A. try", "B. except", "C. finally", "D. error"], "C"),
+
+    ("Which keyword is used to create an anonymous function?",
+     ["A. def", "B. lambda", "C. func", "D. anon"], "B"),
+
+    ("Which module is used for random number generation?",
+     ["A. math", "B. random", "C. numbers", "D. randint"], "B"),
+
+    ("What is the output of print(5 % 2)?",
+     ["A. 0", "B. 1", "C. 2", "D. 2.5"], "B"),
+
+    ("Which function converts string to integer?",
+     ["A. str()", "B. float()", "C. int()", "D. chr()"], "C"),
+
+    ("Which method removes all elements from a list?",
+     ["A. remove()", "B. delete()", "C. clear()", "D. pop()"], "C"),
+
+    ("Which loop is best when number of iterations is fixed?",
+     ["A. while", "B. do-while", "C. repeat", "D. for"], "D"),
+
+    ("Which symbol is used for logical OR?",
+     ["A. ||", "B. or", "C. |", "D. OR"], "B"),
+
+    ("Which keyword is used to define a generator?",
+     ["A. return", "B. yield", "C. gen", "D. iterator"], "B"),
+
+    ("Which function is used to get user input in Python 3?",
+     ["A. scan()", "B. read()", "C. input()", "D. gets()"], "C")
+
+]
+
+# This list will TRACK unused questions
+unused_questions = QUESTION_BANK.copy()
+
+
+def start_quiz():
+    global unused_questions
+
+    # Reset when all questions are used
+    if len(unused_questions) < 5:
+        print("\n🔁 All questions completed. Resetting question bank...\n")
+        unused_questions = QUESTION_BANK.copy()
+
+    # Pick 5 unique questions (NO repetition)
+    selected_questions = random.sample(unused_questions, 5)
+
+    # Remove used questions
+    for q in selected_questions:
+        unused_questions.remove(q)
+
+    score = 0
+    print("\n===== Python Quiz Application =====\n")
+
+    for i, (question, options, correct) in enumerate(selected_questions, start=1):
+        print(f"Q{i}. {question}")
+        for opt in options:
+            print(opt)
+
+        answer = input("Your answer (A/B/C/D): ").upper()
+
+        if answer == correct:
+            print("✅ Correct!\n")
+            score += 1
+        else:
+            print(f"❌ Wrong! Correct answer is {correct}\n")
+
+    print("===== Quiz Completed =====")
+    print(f"🎯 Score: {score}/5")
+
+
+def main():
+    while True:
+        start_quiz()
+        choice = input("\nPlay again? (yes/no): ").lower()
+        if choice != "yes":
+            print("👋 Thanks for playing!")
+            break
+
+
+if __name__ == "__main__":
+    main()
